@@ -1,6 +1,9 @@
 <div class="container mat-elevation-z8">
+    <div fxLayout="row" class="container center mat-elevation-z8">
+        <span>El dolar TRM para el dia de hoy es: {{trm}}</span>
+    </div>
     <div class="container mat-elevation-z8">
-        <mat-card class="form-parkings">
+        <mat-card class="form-parkings autoMargin">
             <form [formGroup]="vehicleForm">
                 <mat-form-field class="full-width">
                     <input matInput id="licensePlate" placeholder="Placa" formControlName="licensePlate"
