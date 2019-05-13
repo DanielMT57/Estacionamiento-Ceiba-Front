@@ -26,8 +26,10 @@ export class ParkingsComponent implements OnInit {
 
     parkVehicle(form: NgForm) {
         if (this.vehicleForm.valid) {
+            this.toastrService.clear();
             this.api.createParking(form)
                 .subscribe(res => {
+                    this.toastrService.success('El vehiculo ' + res.vehicleDTO.licensePlate + ' ha sido parqueado.');
                     this.loadParkings();
                     this.vehicleForm.reset();
                 }, (err) => {
@@ -38,15 +40,18 @@ export class ParkingsComponent implements OnInit {
     }
 
     leaveParkingTable(tableElement: ParkedVehicle) {
-        let vehicleToLeave = new Vehicle();
+        const vehicleToLeave = new Vehicle();
         vehicleToLeave.licensePlate = tableElement.licensePlate;
         vehicleToLeave.type = tableElement.vehicleType;
         this.leaveParking(vehicleToLeave);
     }
 
     leaveParking(vehicle) {
+        this.toastrService.clear();
         this.api.leaveParking(vehicle)
             .subscribe(res => {
+                this.toastrService.success('El vehiculo ' + res.vehicleDTO.licensePlate + ' debe pagar ' + res.fare
+                    + ' pesos por: ' + res.totalTime);
                 this.loadParkings();
                 this.vehicleForm.reset();
             }, (err) => {

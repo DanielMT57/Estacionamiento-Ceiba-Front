@@ -64,7 +64,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "estacionamiento-front:build"
+            "browserTarget": "estacionamiento-front:build",
+            "port": 4200,
+            "host": "0.0.0.0"
           },
           "configurations": {
             "production": {

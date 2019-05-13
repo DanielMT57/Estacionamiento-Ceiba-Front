@@ -7,5 +7,5 @@ export class Parking {
     outDatetime: Date;
     fare: number;
     totalTime: string;
-    vehicle: Vehicle;
+    vehicleDTO: Vehicle;
 }

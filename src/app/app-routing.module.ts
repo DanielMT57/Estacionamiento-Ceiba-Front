@@ -6,6 +6,11 @@ const routes: Routes = [
     {
         path: 'parkings',
         component: ParkingsComponent
+    },
+    {
+        path: '',
+        redirectTo: '/parkings',
+        pathMatch: 'full'
     }
 ];
 
