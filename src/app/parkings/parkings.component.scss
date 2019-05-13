@@ -1,0 +1,46 @@
+$break-small: 500px;
+$break-pc:1000px;
+
+#toast-container > div {
+    opacity:1;
+}
+
+/* Structure */
+.container {
+  position: relative;
+  padding: 5px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.form-parkings {
+    @media screen and (min-width: $break-pc){
+        width: 30%;
+    }
+}
+
+table {
+  width: 100%;
+}
+
+.button-row {
+  margin: 10px 0;
+  width: 70%;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+.mat-flat-button {
+  margin: 5px;
+}
+

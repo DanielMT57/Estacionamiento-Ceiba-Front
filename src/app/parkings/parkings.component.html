@@ -1,0 +1,69 @@
+<div class="container mat-elevation-z8">
+    <div class="container mat-elevation-z8">
+        <mat-card class="form-parkings">
+            <form [formGroup]="vehicleForm">
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Placa" formControlName="licensePlate"
+                        (input)="getVehicle($event.target.value)" maxlength="6">
+                    <mat-error>
+                        <span
+                            *ngIf="!vehicleForm.get('licensePlate').valid && vehicleForm.get('licensePlate').touched">Placa
+                            invalida</span>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Cilindraje" formControlName="cylinderPower">
+                    <mat-error>
+                        <span
+                            *ngIf="!vehicleForm.get('cylinderPower').valid && vehicleForm.get('cylinderPower').touched">Ingresar
+                            un cilindraje para el vehiculo</span>
+                    </mat-error>
+                </mat-form-field>
+                <div class="button-row">
+                    <button type="button" [disabled]="!vehicleForm.valid" (click)="parkVehicle(vehicleForm.value)"
+                        mat-flat-button color="primary">
+                        <mat-icon>directions_car</mat-icon>
+                        Parquear
+                    </button>
+                    <button type="button" [disabled]="!vehicleForm.get('licensePlate').valid"
+                        (click)="leaveParking(vehicleForm.value)" mat-flat-button color="primary">
+                        <mat-icon>local_car_wash</mat-icon>
+                        Salir
+                    </button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+
+
+    <div class="container mat-elevation-z8">
+        <div class="mat-elevation-z8 mh350 autoOverflow">
+            <table mat-table [dataSource]="data" class="table" matSort matSortActive="vehicleType" matSortDisableClear
+                matSortDirection="asc">
+                <ng-container matColumnDef="licensePlate">
+                    <th mat-header-cell *matHeaderCellDef>Placa</th>
+                    <td mat-cell *matCellDef="let row">{{row.licensePlate}}</td>
+                </ng-container>
+                <ng-container matColumnDef="vehicleType">
+                    <th mat-header-cell *matHeaderCellDef>Tipo Vehiculo</th>
+                    <td mat-cell *matCellDef="let row">{{row.vehicleType}}</td>
+                </ng-container>
+                <ng-container matColumnDef="checkinDate">
+                    <th mat-header-cell *matHeaderCellDef>Fecha Ingreso</th>
+                    <td mat-cell *matCellDef="let row">{{row.checkinDate}}</td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button (click)="leaveParkingTable(row)" mat-button>
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
