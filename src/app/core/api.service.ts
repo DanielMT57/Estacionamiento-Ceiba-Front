@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError} from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { ParkedVehicle } from '../model/parkedVehicle';
-import { Parking } from '../model/parking';
-import { Vehicle } from '../model/vehicle';
+import { ParkedVehicle } from './parkedVehicle';
+import { Parking } from './parking';
+import { Vehicle } from './vehicle';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:4200' })
 };
-const apiUrl = 'http://localhost:8080/parking';
+const apiUrl = environment.apiHost + '/parking';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,6 @@ export class ApiService {
         const url = apiUrl + '/getVehicles';
         return this.http.get<ParkedVehicle[]>(url)
             .pipe(
-                tap(parkings => console.log('retrieved parkings')),
                 catchError(this.handleError<any>('getParkings')
                 ));
 
@@ -32,7 +32,6 @@ export class ApiService {
         const url = apiUrl + '/create';
         return this.http.post<Parking>(url, vehicle, httpOptions)
             .pipe(
-                tap((parking: Parking) => console.log('parking created ${parking.id}')),
                 catchError(this.handleError<any>('createParking')
                 ));
     }
@@ -41,7 +40,6 @@ export class ApiService {
         const url = apiUrl + '/leave';
         return this.http.put<Parking>(url, vehicle, httpOptions)
             .pipe(
-                tap((parking: Parking) => console.log('parking left ${parking.id}')),
                 catchError(this.handleError<any>('leaveParking')
                 ));
     }
@@ -50,7 +48,6 @@ export class ApiService {
         const url = apiUrl + '/getTRM';
         return this.http.get<ParkedVehicle[]>(url)
             .pipe(
-                tap(trm => console.log('retrieved trm')),
                 catchError(this.handleError<any>('getParkings')
                 ));
 
@@ -60,7 +57,6 @@ export class ApiService {
         const url = apiUrl + '/vehicle/get/' + licensePlate;
         return this.http.get<Vehicle>(url)
             .pipe(
-                tap(trm => console.log('retrieved trm')),
                 catchError(this.handleError<any>('getParkings')
                 ));
 

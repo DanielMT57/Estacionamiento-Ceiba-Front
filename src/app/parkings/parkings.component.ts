@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { ParkedVehicle } from '../model/parkedVehicle';
+import { ApiService } from '../core/api.service';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Vehicle } from '../model/vehicle';
+import { ParkedVehicle } from '../core/parkedVehicle';
+import { Vehicle } from '../core/vehicle';
+
 
 @Component({
     selector: 'app-parkings',
@@ -62,7 +63,7 @@ export class ParkingsComponent implements OnInit {
     ngOnInit() {
         this.vehicleForm = this.formBuilder.group({
             licensePlate: [null, [Validators.required, Validators.pattern('^[A-Z]{3}[0-9]{2}([0-9]|[A-Z])$')]],
-            cylinderPower: [null, Validators.required]
+            cylinderPower: [null, [Validators.required, Validators.pattern('^[0-9]+$')]]
         });
         this.loadParkings();
         this.getTRM();

@@ -25,6 +25,11 @@ table {
   width: 100%;
 }
 
+td {
+    @media screen and (max-width: $break-small){
+        padding-right: 20px !important;   
+    }
+}
 
 .button-row {
   margin: 10px 0;
